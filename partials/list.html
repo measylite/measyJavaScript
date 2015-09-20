@@ -1,0 +1,40 @@
+<section class="artistpage">
+	<div class="search">
+    <h1>Item Directory</h1>
+    <label>search:</label>
+    <input ng-model="query" placeholder="Start typing to display content" autofocus>
+    <!-- load order by -->
+    <label class="formgroup">by:
+      <select ng-model="artistOrder">
+        <option value="name">Name</option>
+        <option value="reknown">Reknown</option>
+      </select>
+    </label>
+    <!-- Radio Group -->
+    <label class="formgroup">
+      <input type="radio" ng-model="direction" name="direction" checked>
+      acending
+    </label>
+    <label class="formgroup">
+      <input type="radio" ng-model="direction" name="direction" value="reverse">
+      decending
+    </label>
+  </div>
+
+  <ul class="artistlist" ng-show="query"> <!-- Hide/Show Data  | ng-show="query" | -->
+  <!-- https://docs.angularjs.org/api/ng/directive/ngRepeat -->
+    <!-- <li class="artist cf" ng-repeat = "item in artists | limitTo: 6"> -->
+    <!-- loop through | create var called item the reads from artist-->
+    <li class="artist cf" ng-repeat = "item in artists | filter: query | orderBy: artistOrder:direction">
+    <!-- set up our link for details page | match our app.js -->
+     <a href="#/details/{{artists.indexOf(item)}}">
+    	<!-- hold our json items -->
+	    <img ng-src="images/{{item.shortname}}_tn.jpg" alt="Photo of {{item.name}}">
+	    <div class="info">
+	      <h2>{{item.name | uppercase}}</h2> <!-- uppercase Filter - http://docs.angularjs.org/api/ -->
+	      <h3>{{item.reknown}}</h3>
+	    </div>
+	 </a>   
+    </li>
+  </ul>
+</section>
